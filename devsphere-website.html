@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSphere Academy</title>
+    <style>
+        :root {
+            --primary-dark: #0a0e17;
+            --primary-blue: #0b4f9c;
+            --accent-blue: #1e88e5;
+            --light-blue: #64b5f6;
+            --gradient-blue: linear-gradient(135deg, #0b4f9c, #64b5f6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        #neural-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            background: rgba(10, 14, 23, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            /* Logo placeholder - replace with your actual logo */
+            background: var(--gradient-blue);
+            border-radius: 50%;
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: #b3c5d9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient-blue);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(30, 136, 229, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(30, 136, 229, 0.6);
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-heading h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: var(--gradient-blue);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .section-heading p {
+            color: #b3c5d9;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(14, 22, 39, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 181, 246, 0.1);
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(30, 136, 229, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(30, 136, 229, 0.4);
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .feature-card p {
+            color: #b3c5d9;
+            line-height: 1.6;
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, transparent, rgba(14, 22, 39, 0.8), transparent);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: rgba(14, 22, 39, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 181, 246, 0.1);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(30, 136, 229, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+        }
+
+        .course-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .course-content p {
+            color: #b3c5d9;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: #b3c5d9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(30, 136, 229, 0.4);
+        }
+
+        .contact-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .contact-details h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p, .contact-details a {
+            color: #b3c5d9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--light-blue);
+        }
+
+        .contact-form {
+            background: rgba(14, 22, 39, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 181, 246, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b3c5d9;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 23, 0.95);
+            padding: 50px 0 20px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .footer-logo .brand {
+            font-size: 20px;
+        }
+
+        .footer-about p {
+            color: #b3c5d9;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-blue);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #b3c5d9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-blue);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #b3c5d9;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-heading h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations and Effects */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        .infinity-loader {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+            filter: blur(2px);
+            opacity: 0.7;
+        }
+        
+        /* Glow effects */
+        .glow {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        .glow-1 {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            left: -5%;
+            background: var(--light-blue);
+        }
+        
+        .glow-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -10%;
+            right: -10%;
+            background: var(--primary-blue);
+        }
+        
+        .glow-3 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 30%;
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-delay-1 {
+            animation-delay: 1s;
+        }
+        
+        .float-delay-2 {
+            animation-delay: 2s;
+        }
+        
+        /* Neural Network Background Effect */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="neural-background"></canvas>
+    
+    <!-- Glowing effects -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <div class="logo" style="background: none; display: flex; align-items: center; justify-content: center;">
+                        <img src="penguin.png" alt="DevSphere Academy Logo" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <div class="brand">DevSphere Academy</div>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#courses">Courses</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>Mastering <span>DevOps</span> for the Future of Technology</h1>
+                <p class="animate delay-1">Join DevSphere Academy and unlock the skills needed to excel in today's rapidly evolving tech landscape. Advanced courses designed for modern developers.</p>
+                <div class="animate delay-2" style="display: flex; flex-direction: column; gap: 20px; max-width: 300px;">
+                    <a href="#courses" class="btn" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-search" style="margin-right: 8px;"></i>
+                        Explore Courses
+                    </a>
+                    <a href="#contact" class="btn contact-btn" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>
+                        Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="infinity-loader float">
+                <!-- This will be replaced by the JS animation -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-heading animate">
+                <h2>Why Choose DevSphere</h2>
+                <p>We combine cutting-edge curriculum with practical hands-on experience to prepare you for real-world challenges.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Hands-On Learning</h3>
+                    <p>Practice with real-world projects and scenarios that prepare you for actual DevOps environments.</p>
+                </div>
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud-First Approach</h3>
+                    <p>Master cloud technologies with specialized courses in AWS, Azure, and Google Cloud platforms.</p>
+                </div>
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>CI/CD Mastery</h3>
+                    <p>Learn how to implement and optimize automated pipelines for continuous integration and deployment.</p>
+                </div>
+                <div class="feature-card animate delay-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Infrastructure as Code</h3>
+                    <p>Become proficient in tools like Terraform, Ansible, and Kubernetes for modern infrastructure management.</p>
+                </div>
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security-Focused</h3>
+                    <p>Implement DevSecOps principles with security integrated throughout the DevOps lifecycle.</p>
+                </div>
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Industry Certification</h3>
+                    <p>Prepare for recognized certifications with courses aligned to industry standards and requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-heading animate">
+                <h2>Our Specialized Courses</h2>
+                <p>Comprehensive learning paths designed to build expertise across the DevOps spectrum.</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card animate delay-1">
+                    <div class="course-img">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>DevOps Fundamentals</h3>
+                        <p>Master the core principles and practices of DevOps methodology, including collaboration, automation, and continuous improvement.</p>
+                        <div class="course-meta">
+                            <span>8 Weeks</span>
+                            <span>Beginner Friendly</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card animate delay-2">
+                    <div class="course-img">
+                        <i class="fas fa-docker"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Container Orchestration</h3>
+                        <p>Deep dive into Docker, Kubernetes and container management for scalable and resilient application deployment.</p>
+                        <div class="course-meta">
+                            <span>10 Weeks</span>
+                            <span>Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card animate delay-3">
+                    <div class="course-img">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Cloud Native Architecture</h3>
+                        <p>Design and implement modern applications optimized for cloud environments using microservices and serverless technologies.</p>
+                        <div class="course-meta">
+                            <span>12 Weeks</span>
+                            <span>Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-heading animate">
+                <h2>Get In Touch</h2>
+                <p>Have questions or ready to start your DevOps journey? Reach out to our team.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info animate delay-1">
+                    <h3>Connect With Us</h3>
+                    <p>Our team is always available to help you with any questions about our courses or to discuss how we can tailor our programs to meet your specific needs.</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>WhatsApp</h4>
+                                <a href="https://wa.me/201558256829" target="_blank" id="footer-whatsapp-link">Message us on WhatsApp</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <a href="mailto:abdullrahmaneissa6@gmail.com">abdullrahmaneissa6@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Location</h4>
+                                <p>Cairo, Sheikh Zayed, 6th of October City</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form animate delay-2" style="background: rgba(14, 22, 39, 0.7); border-radius: 15px; padding: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(100, 181, 246, 0.1); text-align: center;">
+                    <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--light-blue); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; font-style: italic;">
+                        "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do."
+                    </h3>
+                    <p style="color: var(--light-blue); font-weight: 600; margin-top: 20px;">- Steve Jobs</p>
+                    
+                    <div style="height: 1px; background: rgba(100, 181, 246, 0.2); margin: 30px 0;"></div>
+                    
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; font-style: italic;">
+                        "Glory lies in the attempt to reach one's goal and not in reaching it."
+                    </h3>
+                    <p style="color: var(--light-blue); font-weight: 600; margin-top: 20px;">- Mahatma Gandhi</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="logo" style="background: none; display: flex; align-items: center; justify-content: center;">
+                            <img src="penguin.png" alt="DevSphere Academy Logo" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="brand">DevSphere Academy</div>
+                    </div>
+                    <p>Empowering tech professionals with cutting-edge DevOps skills for the future of technology.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#features">Features</a>
+                        <a href="#courses">Courses</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Courses</h4>
+                    <div class="footer-links">
+                        <a href="#">DevOps Fundamentals</a>
+                        <a href="#">Container Orchestration</a>
+                        <a href="#">Cloud Native Architecture</a>
+                        <a href="#">Infrastructure as Code</a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Resources</h4>
+                    <div class="footer-links">
+                        <a href="#">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Community Forum</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 DevSphere Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS for form submission -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set WhatsApp Links - both in hero section and footer
+            document.getElementById('whatsapp-link').href = "https://wa.me/201558256829";
+            document.getElementById('footer-whatsapp-link').href = "https://wa.me/201558256829";
+            
+            // Initialize EmailJS
+            emailjs.init("Eu-hlSA3mtyWI484I");
+            
+            // Handle contact form submission
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Display loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = "Sending...";
+                submitBtn.disabled = true;
+                
+                // Prepare template parameters
+                const templateParams = {
+                    from_name: document.getElementById('name').value,
+                    from_email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value,
+                    to_email: "abdullrahmaneissa6@gmail.com"
+                };
+                
+                // Send email using EmailJS
+                emailjs.send("service_j5imr4x", "template_e2l8dsd", templateParams)
+                    .then(function(response) {
+                        // Success message
+                        alert("Message sent successfully! We'll get back to you soon.");
+                        
+                        // Reset form
+                        document.getElementById('contactForm').reset();
+                        
+                        // Restore button
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                    }, function(error) {
+                        // Error message
+                        alert("Sorry, there was an error sending your message. Please try again or contact us directly via WhatsApp or email.");
+                        console.error("EmailJS error:", error);
+                        
+                        // Restore button
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+            });
+            
+            // Setup canvas for neural network and DevOps infinity symbols
+            const canvas = document.getElementById('neural-background');
+            const ctx = canvas.getContext('2d');
+            
+            // Make canvas full screen
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            
+            // DevOps infinity icons and symbols
+            const devopsIcons = [
+                '∞', // Infinity symbol
+                '⚙️', // Gear
+                '🚀', // Rocket
+                '🔄', // Circular arrows
+                '🔧', // Wrench
+                '🔗', // Chain link
+                '🖥️', // Computer
+                '☁️', // Cloud
+                '🔒', // Lock (security)
+                '📊', // Chart (monitoring)
+                '📦', // Package (container)
+            ];
+            
+            // Create particles for the background
+            const particles = [];
+            const numParticles = 40; // Number of floating DevOps elements
+            
+            for (let i = 0; i < numParticles; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 15 + 10,
+                    speedX: (Math.random() - 0.5) * 1.5,
+                    speedY: (Math.random() - 0.5) * 1.5,
+                    icon: devopsIcons[Math.floor(Math.random() * devopsIcons.length)],
+                    opacity: Math.random() * 0.5 + 0.1,
+                    rotate: Math.random() * 360,
+                    rotateSpeed: (Math.random() - 0.5) * 2
+                });
+            }
+            
+            // Create neural network nodes
+            const nodes = [];
+            const numNodes = 40;
+            const connectionDistance = 150;
+            
+            for (let i = 0; i < numNodes; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 1,
+                    speedY: (Math.random() - 0.5) * 1,
+                    color: `rgba(100, 181, 246, ${Math.random() * 0.5 + 0.3})`
+                });
+            }
+            
+            // Animation function
+            function animate() {
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw connections between nodes (neural network effect)
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x;
+                        const dy = nodes[i].y - nodes[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(100, 181, 246, ${0.2 * (1 - distance / connectionDistance)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                // Update and draw nodes
+                nodes.forEach(node => {
+                    // Update position
+                    node.x += node.speedX;
+                    node.y += node.speedY;
+                    
+                    // Bounce off edges
+                    if (node.x < 0 || node.x > canvas.width) node.speedX *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.speedY *= -1;
+                    
+                    // Draw node
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = node.color;
+                    ctx.fill();
+                });
+                
+                // Update and draw infinity and DevOps symbols
+                particles.forEach(particle => {
+                    // Update position
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+                    particle.rotate += particle.rotateSpeed;
+                    
+                    // Bounce off edges or wrap around
+                    if (particle.x < -50) particle.x = canvas.width + 50;
+                    if (particle.x > canvas.width + 50) particle.x = -50;
+                    if (particle.y < -50) particle.y = canvas.height + 50;
+                    if (particle.y > canvas.height + 50) particle.y = -50;
+                    
+                    // Draw icon
+                    ctx.save();
+                    ctx.translate(particle.x, particle.y);
+                    ctx.rotate(particle.rotate * Math.PI / 180);
+                    ctx.font = `${particle.size}px Arial`;
+                    ctx.fillStyle = `rgba(100, 181, 246, ${particle.opacity})`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(particle.icon, 0, 0);
+                    ctx.restore();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            // Start animation
+            animate();
+            
+            // Animation on scroll
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkIfInView() {
+                animateElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
